@@ -3,7 +3,7 @@ SpendSense is a modern, intuitive, and open-source mobile application designed t
 
 This repository contains the complete source code for the SpendSense application.
 
-# Features
+## Features
 SpendSense is packed with features to make financial management simple and effective:
 
 • 🔐 Secure Authentication: Sign up and log in securely with email/password or Google. \
@@ -14,26 +14,39 @@ SpendSense is packed with features to make financial management simple and effec
 • 📜 Full Transaction History: View, and filter all your past transactions with ease. \
 • ⚙️ Personalization: Manage your profile, set preferences and customize your income/expense categories.
 
-# Screenshots
+## Screenshots
 Here's a sneak peek at the clean and user-friendly interface of SpendSense.
 
 ![alt text](assets/images/UI/screenshots.png)
 
-# Tech Stack
-Framework: Flutter \
-Backend/Database: Firebase \
-Authentication: Firebase Auth \
-State Management: Provider
+## Tech Stack
+*   **Framework**: Flutter 
+*   **Backend/Database**: Firebase 
+*   **Authentication**: Firebase Auth 
+*   **State Management**: Provider
 
-# Getting Started
+## Getting Started
+
 To use this App, follow the instructions below:
 
-# Prerequisites
-Ensure you have Flutter installed on your machine. For more information on installing Flutter, refer to the official Flutter documentation.
+### Prerequisites
 
-# Installation
-Clone the repo \
-https://github.com/milanrnw/SpendSense.git \
-Run flutter pub get \
-Connect your device or start an emulator. \
-Run flutter run to launch the app.
+Ensure you have Flutter installed on your machine. For more information on installing Flutter, refer to the official [Flutter documentation](https://docs.flutter.dev/get-started/install).
+
+### Installation
+
+1.  **Clone the repo**
+    ```bash
+    git clone https://github.com/milanrnw/SpendSense.git
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    flutter pub get
+    ```
+
+3.  **Run the app**
+    Connect your device or start an emulator.
+    ```bash
+    flutter run
+    ```
