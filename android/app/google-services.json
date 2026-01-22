@@ -12,7 +12,20 @@
           "package_name": "com.example.spendsense"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "698471842431-ht5kqmq5ouf0j0darnfco026397v20je.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spendsense",
+            "certificate_hash": "7b1978d01a470c77c609e5af645c3117e1810633"
+          }
+        },
+        {
+          "client_id": "698471842431-9dm6t9k5b0qtb0kkopuhmevin580c2g3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCBtp1UuZg3zb5u7YjVfhkao3vAj13s6q4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698471842431-9dm6t9k5b0qtb0kkopuhmevin580c2g3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "698471842431-ckr9gm2p73vd4sab1qtjf57e5dbedns1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.spendsense"
+              }
+            }
+          ]
         }
       }
     }

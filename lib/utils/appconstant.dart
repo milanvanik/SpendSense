@@ -7,14 +7,23 @@ class Appconstant {
     required String message,
     bool isSuccess = true,
   }) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message, style: TextStyle(color: Colors.white)),
-        backgroundColor: isSuccess ? Colors.green : Colors.red,
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentMaterialBanner();
+    final banner = MaterialBanner(
+      content: Text(message, style: TextStyle(color: Colors.white)),
+      backgroundColor: isSuccess ? Colors.green : Colors.red,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      contentTextStyle: const TextStyle(color: Colors.white),
+      actions: [
+        TextButton(
+          onPressed: () => messenger.hideCurrentMaterialBanner(),
+          child: const Text('DISMISS', style: TextStyle(color: Colors.white)),
+        ),
+      ],
     );
+    messenger.showMaterialBanner(banner);
+    Future.delayed(const Duration(seconds: 2), () {
+      messenger.hideCurrentMaterialBanner();
+    });
   }
 }
