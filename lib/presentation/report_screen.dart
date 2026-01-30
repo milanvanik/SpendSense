@@ -310,7 +310,6 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  // This is the only widget that needed to be changed.
   Widget _buildLegend(Color color, String text) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),

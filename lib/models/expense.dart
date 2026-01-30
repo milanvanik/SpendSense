@@ -10,7 +10,7 @@ class ExpenseModel {
   final double amount;
   final DateTime date;
   final String categoryId;
-  String? description; // Made nullable to match your UserDetails style
+  String? description;
 
   ExpenseModel({
     required this.id,
@@ -22,9 +22,8 @@ class ExpenseModel {
 
   factory ExpenseModel.fromJson(Map<String, dynamic> json) => ExpenseModel(
     id: json["id"],
-    // The '?? 0.0' provides a fallback if the amount is null
     amount: (json["amount"] as num?)?.toDouble() ?? 0.0,
-    // Dates in JSON are typically strings, so we parse it into a DateTime object
+    // Dates in JSON are typically strings, so parsed it into a DateTime object
     date: DateTime.parse(json["date"]),
     categoryId: json["categoryId"],
     description: json["description"],

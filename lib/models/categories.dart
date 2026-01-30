@@ -9,8 +9,8 @@ class CategoryModel {
   final String id;
   final String name;
   final String type;
-  String? icon; // Optional: for an icon identifier string
-  String? color; // Optional: for a color hex string
+  String? icon;
+  String? color;
 
   CategoryModel({
     required this.id,

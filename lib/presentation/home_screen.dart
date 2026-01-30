@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                // Top Bar remains the same
                 _buildTopBar(),
                 SizedBox(height: 30.h),
 
@@ -103,14 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
       stream: _firestoreService.getMonthlyTransactionsStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Show shimmer or basic loading for cards
           return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           return const Center(child: Text("Error loading data."));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          // Show default zero-state for cards
           return _buildOverviewCards(0.0, 0.0, 0.0);
         }
 

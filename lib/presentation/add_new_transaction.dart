@@ -139,30 +139,25 @@ class _AddNewTransactionState extends State<AddNewTransaction> {
               _buildTypeSelector(),
               SizedBox(height: 30.h),
 
-              // --- FINAL, ROBUST FIX FOR THE AMOUNT FIELD ---
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
-                  // 1. The symbol is a simple Text widget, outside the TextFormField
                   Text("₹", style: amountStyle),
                   SizedBox(width: 8.w),
-                  // 2. The TextFormField is wrapped in Expanded to take the remaining space
                   Expanded(
                     child: TextFormField(
                       controller: _amountController,
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
-                      style: amountStyle, // Use the shared style
+                      style: amountStyle,
                       decoration: InputDecoration(
-                        // No prefix properties needed anymore
                         hintText: "0.00",
                         hintStyle: amountStyle.copyWith(
                           color: Colors.grey.shade300,
                         ),
                         border: InputBorder.none,
-                        // Remove extra padding to improve alignment
                         contentPadding: EdgeInsets.zero,
                       ),
                       validator: (value) {
@@ -178,7 +173,6 @@ class _AddNewTransactionState extends State<AddNewTransaction> {
                   ),
                 ],
               ),
-              // ------------------------------------
               const Divider(),
               SizedBox(height: 30.h),
 
@@ -212,7 +206,6 @@ class _AddNewTransactionState extends State<AddNewTransaction> {
     );
   }
 
-  // ... The rest of your file (_buildTypeSelector, _buildCategoryDropdown, _buildDatePicker) remains exactly the same ...
   Widget _buildTypeSelector() {
     void onTypeChanged(String type) {
       setState(() {

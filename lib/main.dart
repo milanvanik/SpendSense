@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
             title: 'SpendSense',
             theme: ThemeData(
               primarySwatch: Colors.blue,
-              //visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: 'Poppins',
             ),
             home: const AuthWrapper(),

@@ -22,7 +22,7 @@ class Appconstant {
       ],
     );
     messenger.showMaterialBanner(banner);
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       messenger.hideCurrentMaterialBanner();
     });
   }
