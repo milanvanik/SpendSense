@@ -85,11 +85,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
+    final batch = firestore.batch();
+
     // 2. Create the main user profile document.
     final userDoc = firestore
         .collection(FirestoreCollection.usersCollection)
         .doc(userDetails.uid);
-    await userDoc.set(userDetails.toJson());
+    batch.set(userDoc, userDetails.toJson());
 
     // 3. Get a reference to the user's personal categories subcollection.
     final categoriesSubcollection = userDoc.collection(
@@ -97,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
 
     // 4. Create each default category one by one.
-    await categoriesSubcollection.doc('food').set({
+    batch.set(categoriesSubcollection.doc('food'), {
       'id': 'food',
       'name': 'Food & Dining',
       'type': 'expense',
@@ -105,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'color': 'FF455A64',
     });
 
-    await categoriesSubcollection.doc('bills').set({
+    batch.set(categoriesSubcollection.doc('bills'), {
       'id': 'bills',
       'name': 'Bills & Utilities',
       'type': 'expense',
@@ -113,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'color': 'FFFF7043',
     });
 
-    await categoriesSubcollection.doc('salary').set({
+    batch.set(categoriesSubcollection.doc('salary'), {
       'id': 'salary',
       'name': 'Salary',
       'type': 'income',
@@ -121,6 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'color': 'FF66BB6A',
     });
 
+    await batch.commit();
     print("User setup complete!");
   }
 
@@ -135,7 +138,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .createUserWithEmailAndPassword(
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
-            );
+            )
+            .timeout(const Duration(seconds: 15));
 
         final user = userCredentials.user;
         if (user == null) {
@@ -143,12 +147,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
 
         // Create user details and store them in Firestore
-        await _storeUserdata(
-          userDetails: UserDetails(
-            uid: user.uid,
-            email: user.email ?? _emailController.text.trim(),
-          ),
-        );
+        try {
+          await _storeUserdata(
+            userDetails: UserDetails(
+              uid: user.uid,
+              email: user.email ?? _emailController.text.trim(),
+            ),
+          ).timeout(const Duration(seconds: 10)); // Timeout after 10s
+        } catch (e) {
+          // If Firestore write hangs or fails, rollback the user creation
+          // to prevent ghost accounts with no database data.
+          await user.delete();
+          throw Exception(
+            "Database unreachable! Have you created the Firestore Database in the Firebase Console?",
+          );
+        }
 
         if (!mounted) return;
         Navigator.pushAndRemoveUntil(
@@ -176,14 +189,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         } else {
           Appconstant.showSnackBar(
             context,
-            message: "An error occurred",
+            message: e.message ?? "An error occurred",
             isSuccess: false,
           );
         }
       } catch (error) {
         Appconstant.showSnackBar(
           context,
-          message: "Oops! Something went wrong",
+          message: error.toString().replaceAll("Exception: ", ""),
           isSuccess: false,
         );
       }

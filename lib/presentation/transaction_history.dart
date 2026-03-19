@@ -75,7 +75,6 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                 "No transactions found.",
                 style: TextStyle(color: Colors.grey),
               ),
-              
             );
           }
 

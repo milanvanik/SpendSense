@@ -152,10 +152,12 @@ class _LoginScreenState extends State<LoginScreen> {
       });
 
       try {
-        await firebaseAuth.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+        await firebaseAuth
+            .signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            )
+            .timeout(const Duration(seconds: 15));
 
         if (!mounted) return;
         Navigator.pushAndRemoveUntil(

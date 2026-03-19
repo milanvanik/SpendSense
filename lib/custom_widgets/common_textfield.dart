@@ -47,6 +47,7 @@ class _CommonTextfieldState extends State<CommonTextfield> {
         textInputAction: widget.textInputAction,
         keyboardType: widget.textInputType,
         obscureText: widget.isPassword && _isObscured,
+        validator: widget.validator,
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: TextStyle(
